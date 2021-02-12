@@ -18,6 +18,8 @@ staging:
     - apt-get update -qy
     - apt-get install -y ruby-dev git curl
     - gem install dpl
-    - dpl --provider=heroku --app=ddd-ecommerce --api-key=$HEROKU_STAGING_API_KEY GRADLE_TASK="build"
+    - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+    - heroku config:set --app=$HEROKU_APPNAME --api-key=$HEROKU_STAGING_API_KEY GRADLE_TASK="build"
+    - dpl --provider=heroku --app=ddd-ecommerce --api-key=$HEROKU_STAGING_API_KEY
   only:
     - master
