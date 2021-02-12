@@ -16,7 +16,7 @@ staging:
   stage: deploy
   script:
     - apt-get update -qy
-    - apt-get install -y ruby-dev
+    - apt-get install -y ruby-dev git
     - gem install dpl
     - dpl --provider=heroku --app=ddd-pipeline --api-key=$HEROKU_STAGING_API_KEY
   only:
