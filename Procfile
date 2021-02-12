@@ -1,0 +1,1 @@
+web: java -jar build/libs/ddd-ecommerce-0.1-all.jar
