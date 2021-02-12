@@ -1,3 +1,5 @@
 micronaut:
   application:
-    name: katas
+    name: ddd-ecommerce
+  server:
+    port: ${HTTP_PORT:8080}
