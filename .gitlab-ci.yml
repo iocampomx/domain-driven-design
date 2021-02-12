@@ -16,7 +16,7 @@ staging:
   stage: deploy
   script:
     - apt-get update -qy
-    - apt-get install -y ruby-dev git curl
+    - apt-get install -y ruby-dev git curl wget
     - gem install dpl
     - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
     - heroku config:set --app=$HEROKU_APPNAME --api-key=$HEROKU_STAGING_API_KEY GRADLE_TASK="build"
