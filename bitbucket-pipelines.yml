@@ -1,0 +1,23 @@
+image: openjdk:13-slim-buster
+
+pipelines:
+  default:
+    - step:
+        name: Test
+        script:
+          - bash ./gradlew test
+    - step:
+        name: Build
+        script:
+          - bash ./gradlew build
+    - step:
+        name: Deploy
+        deployment: production
+        script:
+          - apt-get update -qy
+          - apt-get install -y ruby-dev git curl wget gnupg2
+          - gem install dpl
+          - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+          - export HEROKU_API_KEY=$HEROKU_STAGING_API_KEY
+          - heroku config:set --app=ddd-ecommerce GRADLE_TASK="build"
+          - dpl --provider=heroku --app=ddd-ecommerce --api-key=$HEROKU_STAGING_API_KEY
