@@ -1,0 +1,18 @@
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  script:
+    - ./gradlew test
+
+staging:
+  stage: deploy
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=ddd-pipeline --api-key=$HEROKU_STAGING_API_KEY
+  only:
+    - master
